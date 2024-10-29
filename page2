@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://www.gstatic.com/firebasejs/9.10.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.10.0/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.10.0/firebase-database.js"></script>
+  <title>$COLLIE Reward System with Firebase</title>
+</head>
+<body>
+  <div class="container">
+    <h1>$COLLIE Rewards</h1>
+    <button onclick="showAd()">Watch Ad for Points</button>
+    <p>Your points: <span id="points">0</span></p>
+  </div>
+
+  <script>
+    // Firebase configuration from your Firebase project
+    const firebaseConfig = {
+      apiKey: "YOUR_API_KEY",
+      authDomain: "YOUR_AUTH_DOMAIN",
+      databaseURL: "YOUR_DATABASE_URL",
+      projectId: "YOUR_PROJECT_ID",
+      storageBucket: "YOUR_STORAGE_BUCKET",
+      messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
+      appId: "YOUR_APP_ID"
+    };
+
+    // Initialize Firebase
+    const app = firebase.initializeApp(firebaseConfig);
+    const auth = firebase.auth();
+    const database = firebase.database();
+
+    let points = 0;
+    let userId;
+
+    // Sign in anonymously
+    auth.signInAnonymously().then(userCredential => {
+      userId = userCredential.user.uid;
+      loadUserPoints(); // Load points from the database for this user
+    });
+
+    // Load points from Firebase
+    function loadUserPoints() {
+      const userRef = database.ref('users/' + userId);
+      userRef.once('value', snapshot => {
+        if (snapshot.exists()) {
+          points = snapshot.val().points || 0;
+          document.getElementById('points').textContent = points;
+        }
+      });
+    }
+
+    // Function to show ad and update points
+    function showAd() {
+      // Simulate ad completion (replace with Adsgram logic)
+      setTimeout(() => {
+        points += 10;
+        document.getElementById('points').textContent = points;
+        saveUserPoints();
+      }, 1000); // Simulate ad completion delay
+    }
+
+    // Save updated points to Firebase
+    function saveUserPoints() {
+      const userRef = database.ref('users/' + userId);
+      userRef.set({ points });
+    }
+  </script>
+</body>
+</html>
