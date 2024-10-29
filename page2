@@ -18,13 +18,13 @@
   <script>
     // Firebase configuration from your Firebase project
     const firebaseConfig = {
-      apiKey: "YOUR_API_KEY",
-      authDomain: "YOUR_AUTH_DOMAIN",
-      databaseURL: "YOUR_DATABASE_URL",
-      projectId: "YOUR_PROJECT_ID",
-      storageBucket: "YOUR_STORAGE_BUCKET",
-      messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
-      appId: "YOUR_APP_ID"
+      apiKey: "AIzaSyBhJpL-nzbrCSpOAXWfpXZmsTgeCPeyu1Y",
+    authDomain: "collie-on-injective.firebaseapp.com",
+    projectId: "collie-on-injective",
+    storageBucket: "collie-on-injective.appspot.com",
+    messagingSenderId: "663589363753",
+    appId: "1:663589363753:web:fa77a96f085c2806937c38",
+    measurementId: "G-WV14XZYHK2"
     };
 
     // Initialize Firebase
